@@ -9,6 +9,10 @@ import { SectionSaleComponent } from './sections/section-sale/section-sale.compo
 import { SectionOrdersComponent } from './sections/section-orders/section-orders.component';
 import { SectionHealthComponent } from './sections/section-health/section-health.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ChartsModule} from 'ng2-charts';
+import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
+import { LineChartComponent } from './charts/line-chart/line-chart.component';
+import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +21,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     SidebarComponent,
     SectionSaleComponent,
     SectionOrdersComponent,
-    SectionHealthComponent
+    SectionHealthComponent,
+    BarChartComponent,
+    LineChartComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

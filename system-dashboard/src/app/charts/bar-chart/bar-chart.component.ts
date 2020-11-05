@@ -28,7 +28,7 @@ export class BarChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.barChartData = BarChartData;
-    this.barChartLabels = BarChartLabels
+    this.barChartLabels = BarChartLabels;
   }
 
 }

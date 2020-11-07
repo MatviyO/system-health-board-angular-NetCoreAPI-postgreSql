@@ -31,7 +31,7 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

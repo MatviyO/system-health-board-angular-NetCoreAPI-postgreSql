@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E8GY3yALZEvotm/0n4rZb1YigaZhlE74uMyi4aKhjbVPMSJfeMMJgPF91nu8w2F1wGbHc+pPjjTySNa4mMxpgA==",
+  "dgSpecHash": "Ryb30wVs26QjLdKoHqog7uDYolE1F4izVocKdFY20p4pU228Li0/4vclHCjzd98m5jbLG19BWSkeu7OCz/bTRw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\system-health-board-angular-NetCoreAPI-postgreSql.csproj",
+  "projectFilePath": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\webapi\\system-health-board-angular-NetCoreAPI-postgreSql.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

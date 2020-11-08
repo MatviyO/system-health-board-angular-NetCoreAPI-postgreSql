@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\system-health-board-angular-NetCoreAPI-postgreSql.csproj": {}
+    "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\webapi\\system-health-board-angular-NetCoreAPI-postgreSql.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\system-health-board-angular-NetCoreAPI-postgreSql.csproj": {
+    "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\webapi\\system-health-board-angular-NetCoreAPI-postgreSql.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\system-health-board-angular-NetCoreAPI-postgreSql.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\webapi\\system-health-board-angular-NetCoreAPI-postgreSql.csproj",
         "projectName": "system-health-board-angular-NetCoreAPI-postgreSql",
-        "projectPath": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\system-health-board-angular-NetCoreAPI-postgreSql.csproj",
+        "projectPath": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\webapi\\system-health-board-angular-NetCoreAPI-postgreSql.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\obj\\",
+        "outputPath": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\webapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

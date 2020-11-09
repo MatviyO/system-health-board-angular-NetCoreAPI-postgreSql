@@ -28,3 +28,17 @@ C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.csproj.CopyComplete
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\WebApiCore.deps.json
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\WebApiCore.runtimeconfig.json
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\WebApiCore.runtimeconfig.dev.json
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\WebApiCore.dll
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\WebApiCore.pdb
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\Npgsql.dll
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.dll
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.pdb
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.genruntimeconfig.cache
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.csproj.CoreCompileInputs.cache
+C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.MvcApplicationPartsAssemblyInfo.cache

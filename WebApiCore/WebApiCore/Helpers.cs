@@ -12,11 +12,25 @@ namespace WebApiCore
 		{
 			return items[_rand.Next(items.Count)];
 		}
-		internal static string MakeCustomerName()
+		internal static string MakeUniqueCustomerName(List<string> names)
 		{
+			var maxNames = bizPrefix.Count * bizSuffix.Count;
+
+			if(names.Count >= maxNames)
+			{
+				throw new System.InvalidOperationException("Maximum number of unique names exceeded");
+			}
+
 			var prefix = GetRandom(bizPrefix);
 			var suffix = GetRandom(bizSuffix);
-			return prefix + suffix;
+			var bizName = prefix + suffix;
+
+			if(names.Contains(bizName))
+			{
+				MakeUniqueCustomerName(names);
+			}
+
+			return bizName;
 		}
 
 		internal static string MakeCustomerEmail(string customerName)
@@ -26,7 +40,11 @@ namespace WebApiCore
 
 		internal static string GetRandomState()
 		{
-
+			return GetRandom(usStates);
+		}
+		internal static decimal GetRandomOrderTotal()
+		{
+			return _rand.Next(100, 5000);
 		}
 
 		private static readonly List<string> usStates = new List<string>()

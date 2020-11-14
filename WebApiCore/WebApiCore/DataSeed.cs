@@ -38,20 +38,51 @@ namespace WebApiCore
 				_ctx.Customers.Add(customer);
 			}
 		}
+		private void SeedOrders(int n)
+		{
+			List<Order> orders = BuildOrderList(n);
+			foreach (var order in orders)
+			{
+				_ctx.Orders.Add(order);
+			}
+		}
 		private List<Customer> BuildCustomerList(int nCustomers)
 		{
 			var customers = new List<Customer>();
-			for(var i = 1; i <= nCustomers; i++)
+			var names = new List<string>();
+
+			for (var i = 1; i <= nCustomers; i++)
 			{
-				var name = Helpers.MakeCustomerName();
+				var name = Helpers.MakeUniqueCustomerName(names);
+				names.Add(name);
 				customers.Add(new Customer
 				{
 					Id = i,
 					Name = name,
-					Email = email, 
-					State = state
+					Email = Helpers.MakeCustomerEmail(name), 
+					State = Helpers.GetRandomState()
 
+				});
+			}
+			return customers;
+		}
+		private List<Order> BuildOrderList(int nOrders)
+		{
+			var orders = new List<Order>();
+			var rand = new Random();
 
+			for(var i = 1; i <= nOrders; i++)
+			{
+				var randCustomerId = rand.Next(_ctx.Customers.Count());
+				var placed = Helpers.GetRandomOrderPlaced();
+				var completed = Helpers.GetRandomCompletedPlaced(placed);
+				orders.Add(new Order
+				{
+					Id = i,
+					Customer = _ctx.Customers.First(c => c.Id == randCustomerId),
+					Total = Helpers.GetRandomOrderTotal(),
+					Placed = placed,
+					Completed = completed
 
 				});
 			}

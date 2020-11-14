@@ -75,7 +75,7 @@ namespace WebApiCore
 			{
 				var randCustomerId = rand.Next(_ctx.Customers.Count());
 				var placed = Helpers.GetRandomOrderPlaced();
-				var completed = Helpers.GetRandomCompletedPlaced(placed);
+				var completed = Helpers.GetRandomOrderCompleted(placed);
 				orders.Add(new Order
 				{
 					Id = i,
@@ -86,6 +86,7 @@ namespace WebApiCore
 
 				});
 			}
+			return orders;
 		}
 	}
 }

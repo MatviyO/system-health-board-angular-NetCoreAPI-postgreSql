@@ -5390,23 +5390,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Code\\github\\system-health-board-angular-NetCoreAPI-postgreSql\\WebApiCore\\WebApiCore\\WebApiCore.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\WebApiCore\\WebApiCore\\WebApiCore.csproj",
       "projectName": "WebApiCore",
-      "projectPath": "C:\\Users\\User\\Code\\github\\system-health-board-angular-NetCoreAPI-postgreSql\\WebApiCore\\WebApiCore\\WebApiCore.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Code\\github\\system-health-board-angular-NetCoreAPI-postgreSql\\WebApiCore\\WebApiCore\\obj\\",
+      "projectPath": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\WebApiCore\\WebApiCore\\WebApiCore.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Code\\GitProjects\\system-health-board-angular-NetCoreAPI-postgreSql\\WebApiCore\\WebApiCore\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

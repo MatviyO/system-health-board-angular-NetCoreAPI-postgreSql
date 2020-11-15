@@ -25,7 +25,16 @@ namespace WebApiCore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            /*_connectionString = Configuration["secretConnectionString"];*/
+            /*services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy",
+                    b => b.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials());
+            }
+            );*/
+
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddDbContext<ApiContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
@@ -34,27 +43,22 @@ namespace WebApiCore
             /* services.AddEntityFrameworkNpgsql().AddDbContext<ApiContext>(opt => opt.UseNpgsql(_connectionString));*/
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataSeed seed)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataSeed seeder)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            seed.SeedData(20, 1000);
+            /*app.UseCors("CorsPolicy");*/
 
-            app.UseMvc();
+            var nCustomers = 20;
+            var nOrders = 1000;
+            seeder.SeedData(nCustomers, nOrders);
 
-            /* app.UseRouting();
-
-             app.UseEndpoints(endpoints =>
-             {
-                 endpoints.MapGet("/", async context =>
-                 {
-                     await context.Response.WriteAsync("Hello World!");
-                 });
-             });*/
+            app.UseMvc(routes =>
+                routes.MapRoute("default", "api/{controller}/{action}/{id?}")
+            );
         }
     }
 }

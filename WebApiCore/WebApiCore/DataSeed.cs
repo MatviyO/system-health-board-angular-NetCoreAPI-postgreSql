@@ -26,7 +26,7 @@ namespace WebApiCore
 			}
 			if (!_ctx.Servers.Any())
 			{
-				SeedServers(nCustomers);
+				SeedServers();
 			}
 			_ctx.SaveChanges();
 		}
@@ -44,6 +44,15 @@ namespace WebApiCore
 			foreach (var order in orders)
 			{
 				_ctx.Orders.Add(order);
+			}
+		}
+
+		private void SeedServers()
+		{
+			List<Server> servers = BuildServerList();
+			foreach(var server in servers)
+			{
+				_ctx.Servers.Add(server);
 			}
 		}
 		private List<Customer> BuildCustomerList(int nCustomers)
@@ -87,6 +96,67 @@ namespace WebApiCore
 				});
 			}
 			return orders;
+		}
+		private List<Server> BuildServerList()
+		{
+			return new List<Server>()
+			{
+				new Server
+				{
+					Id = 1,
+					Name = "Dev-Web",
+					IsOnline = true
+				},
+				new Server
+				{
+					Id = 2,
+					Name = "Dev-Mail",
+					IsOnline = false
+				},
+				new Server
+				{
+					Id = 3,
+					Name = "Dev-Services",
+					IsOnline = true
+				},
+				new Server
+				{
+					Id = 4,
+					Name = "QA-Web",
+					IsOnline = true
+				},
+				new Server
+				{
+					Id = 5,
+					Name = "QA-Mail",
+					IsOnline = false
+				},
+				new Server
+				{
+					Id = 6,
+					Name = "QA-Services",
+					IsOnline = true
+				},
+				new Server
+				{
+					Id = 7,
+					Name = "Prod-Web",
+					IsOnline = true
+				},
+				new Server
+				{
+					Id = 8,
+					Name = "Prod-Mail",
+					IsOnline = true
+				},
+				new Server
+				{
+					Id = 9,
+					Name = "Prod-Services",
+					IsOnline = true
+				},
+			};
+
 		}
 	}
 }

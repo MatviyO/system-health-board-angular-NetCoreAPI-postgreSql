@@ -26,30 +26,35 @@ namespace WebApiCore
         public void ConfigureServices(IServiceCollection services)
         {
             /*_connectionString = Configuration["secretConnectionString"];*/
-            services.AddMvc();
+            services.AddMvc(option => option.EnableEndpointRouting = false)
             services.AddDbContext<ApiContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
                     );
+            services.AddTransient<DataSeed>();
             /* services.AddEntityFrameworkNpgsql().AddDbContext<ApiContext>(opt => opt.UseNpgsql(_connectionString));*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataSeed seed)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
+            seed.SeedData(20, 1000);
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
+            app.UseMvc();
+
+            /* app.UseRouting();
+
+             app.UseEndpoints(endpoints =>
+             {
+                 endpoints.MapGet("/", async context =>
+                 {
+                     await context.Response.WriteAsync("Hello World!");
+                 });
+             });*/
         }
     }
 }

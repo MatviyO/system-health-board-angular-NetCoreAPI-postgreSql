@@ -18,17 +18,20 @@ namespace WebApiCore
 			if (!_ctx.Customers.Any())
 			{
 				SeedCustomers(nCustomers);
+				_ctx.SaveChanges();
 			}
 
 			if (!_ctx.Customers.Any())
 			{
 				SeedOrders(nCustomers);
+				_ctx.SaveChanges();
 			}
 			if (!_ctx.Servers.Any())
 			{
 				SeedServers();
+				_ctx.SaveChanges();
 			}
-			_ctx.SaveChanges();
+			
 		}
 		private void SeedCustomers(int n)
 		{
@@ -41,6 +44,7 @@ namespace WebApiCore
 		private void SeedOrders(int n)
 		{
 			List<Order> orders = BuildOrderList(n);
+
 			foreach (var order in orders)
 			{
 				_ctx.Orders.Add(order);
@@ -82,13 +86,15 @@ namespace WebApiCore
 
 			for(var i = 1; i <= nOrders; i++)
 			{
-				var randCustomerId = rand.Next(_ctx.Customers.Count());
+				var randCustomerId = rand.Next(1, _ctx.Customers.Count());
 				var placed = Helpers.GetRandomOrderPlaced();
 				var completed = Helpers.GetRandomOrderCompleted(placed);
+				var customers = _ctx.Customers.ToList();
+
 				orders.Add(new Order
 				{
 					Id = i,
-					Customer = _ctx.Customers.First(c => c.Id == randCustomerId),
+					Customer = customers.First(c => c.Id == randCustomerId),
 					Total = Helpers.GetRandomOrderTotal(),
 					Placed = placed,
 					Completed = completed

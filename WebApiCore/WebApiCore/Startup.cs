@@ -26,7 +26,7 @@ namespace WebApiCore
         public void ConfigureServices(IServiceCollection services)
         {
             /*_connectionString = Configuration["secretConnectionString"];*/
-            services.AddMvc(option => option.EnableEndpointRouting = false)
+            services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddDbContext<ApiContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
                     );

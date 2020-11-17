@@ -13,13 +13,16 @@ namespace WebApiCore.Contollers
 		private readonly ApiContext _ctx;
 		public CustomerController(ApiContext ctx)
 		{
-			_ctx = ctx
+			_ctx = ctx;
 		}
 
+		[HttpGet]
 		public IActionResult Get()
 		{
-
+			var data = _ctx.Customers.OrderBy(c => c.Id);
+			return Ok(data);
 		}
+		[HttpGet]
 
 	}
 }

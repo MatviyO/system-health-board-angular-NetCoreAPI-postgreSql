@@ -15,27 +15,25 @@ namespace WebApiCore
 {
     public class Startup
     {
-        private string _connectionString = null;
+       
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
         public IConfiguration Configuration { get; }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            /*services.AddCors(opt =>
-            {
-                opt.AddPolicy("CorsPolicy",
-                    b => b.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader()
-                          .AllowCredentials());
+			services.AddCors(options =>
+			{
+                    options.AddDefaultPolicy(builder =>
+               builder.SetIsOriginAllowed(_ => true)
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .AllowCredentials());
             }
-            );*/
+			);
 
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+			services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddDbContext<ApiContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
                     );
@@ -50,9 +48,9 @@ namespace WebApiCore
                 app.UseDeveloperExceptionPage();
             }
 
-            /*app.UseCors("CorsPolicy");*/
+			app.UseCors("CorsPolicy");
 
-            var nCustomers = 20;
+			var nCustomers = 20;
             var nOrders = 1000;
             seeder.SeedData(nCustomers, nOrders);
 

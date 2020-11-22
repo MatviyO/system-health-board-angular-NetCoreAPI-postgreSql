@@ -8,79 +8,137 @@ using WebApiCore.Models;
 
 namespace WebApiCore.Contollers
 {
-	[Route("api/[controller]")]  
-	public class OrderController : Controller
-	{
-		private readonly ApiContext _ctx;
-		
-		public OrderController(ApiContext ctx)
-		{
-			_ctx = ctx;
-		}
-		[HttpDelete("{pageIndex:int}/{pageSize:int}")]
-		public IActionResult Get(int pageIndex, int pageSize)
-		{
-			var data = _ctx.Orders.Include(o => o.Customer)
-				.OrderByDescending(c => c.Placed);
+    [Route("api/[controller]")]
+    public class OrderController : Controller
+    {
+        private readonly ApiContext _ctx;
 
-			var page = new PaginatedResponse<Order>(data, pageIndex, pageSize);
+        public OrderController(ApiContext ctx)
+        {
+            _ctx = ctx;
+        }
 
-			var totalCount = data.Count();
-			var totalPages = Math.Ceiling((double)totalCount / pageSize);
+        // GET api/order/pageNumber/pageSize
+        [HttpGet("{pageIndex:int}/{pageSize:int}")]
+        public IActionResult Get(int pageIndex, int pageSize)
+        {
+            var data = _ctx.Orders.Include(o => o.Customer).OrderByDescending(c => c.Placed);
+            var page = new PaginatedResponse<Order>(data, pageIndex, pageSize);
 
-			var response = new
-			{
-				Page = page,
-				TotalPages = totalPages
-			};
+            var totalCount = data.Count();
+            var totalPages = Math.Ceiling((double)totalCount / pageSize);
 
-			return Ok(response);
-		}
+            var response = new
+            {
+                Page = page,
+                TotalPages = totalPages
+            };
 
-		[HttpGet("ByState")]
-		public IActionResult ByState()
-		{
-			var orders = _ctx.Orders.Include(o => o.Customer).ToList();
+            return Ok(response);
+        }
 
-			var groupedResult = orders.GroupBy(o => o.Customer.State)
-				.ToList()
-				.Select(grp => new {
-					State = grp.Key,
-					Total = grp.Sum(x => x.Total)
-				})
-				.OrderByDescending(res => res.Total)
-				.ToList();
+        [HttpGet("bystate")]
+        public IActionResult ByState()
+        {
+            // enumerated group due to ef error
+            // https://github.com/aspnet/EntityFrameworkCore/issues/9551
 
-			return Ok(groupedResult);
+            var orders = _ctx.Orders.Include(o => o.Customer).ToList();
+            var groupedResult = orders
+                .GroupBy(r => r.Customer.State)
+                .ToList()
+                .Select(grp => new
+                {
+                    State = grp.Key,
+                    Total = grp.Sum(x => x.OrderTotal)
+                }).OrderByDescending(r => r.Total)
+                .ToList();
 
-		}
+            return Ok(groupedResult);
+        }
 
-		[HttpGet("ByCustomer/{n}")]
-		public IActionResult ByCustomer(int n)
-		{
-			var orders = _ctx.Orders.Include(o => o.Customer).ToList();
+        [HttpGet("bycustomer/{n}")]
+        public IActionResult ByCustomer(int n)
+        {
+            // enumerated group due to ef error
+            // https://github.com/aspnet/EntityFrameworkCore/issues/9551
 
-			var groupedResult = orders.GroupBy(o => o.Customer.Id)
-				.ToList()
-				.Select(grp => new {
-					Name = _ctx.Customers.Find(grp.Key).Name,
-					Total = grp.Sum(x => x.Total)
-				})
-				.OrderByDescending(res => res.Total)
-				.Take(n)
-				.ToList();
+            var orders = _ctx.Orders.Include(o => o.Customer).ToList();
+            var groupedResult = orders
+                .GroupBy(r => r.Customer.Id)
+                .ToList()
+                .Select(grp => new
+                {
+                    Name = _ctx.Customers.Find(grp.Key).Name,
+                    Total = grp.Sum(x => x.OrderTotal)
+                }).OrderByDescending(r => r.Total)
+                .Take(n)
+                .ToList();
 
-			return Ok(groupedResult);
+            return Ok(groupedResult);
+        }
 
-		}
+        // GET api/order/5
+        [HttpGet("getorder/{id}", Name = "GetOrder")]
+        public Order GetOrder(int id)
+        {
+            return _ctx.Orders.Include(o => o.Customer)
+                .First(o => o.Id == id);
+        }
 
-		[HttpGet("GetOrder/{id}", Name = "GetOrder")]
-		public IActionResult GetOrder(int id)
-		{
-			var order = _ctx.Orders.Include(o => o.Customer)
-				.First(o => o.Id == id);
+        // POST api/order
+        [HttpPost]
+        public IActionResult Post([FromBody] Order order)
+        {
+            if (order == null)
+            {
+                return BadRequest();
+            }
 
-				return Ok(order);
-		}
-	}
+            _ctx.Orders.Add(order);
+            _ctx.SaveChanges();
+
+            return CreatedAtRoute("GetOrder", new { id = order.Id }, order);
+        }
+
+        // PUT api/order/5
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] Order order)
+        {
+            if (order == null || order.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var updatedOrder = _ctx.Orders.FirstOrDefault(c => c.Id == id);
+
+            if (updatedOrder == null)
+            {
+                return NotFound();
+            }
+
+            updatedOrder.Customer = order.Customer;
+            updatedOrder.Completed = order.Completed;
+            updatedOrder.OrderTotal = order.OrderTotal;
+            updatedOrder.Placed = order.Placed;
+
+            _ctx.SaveChanges();
+            return new NoContentResult();
+        }
+
+        // DELETE api/order/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var order = _ctx.Orders.FirstOrDefault(t => t.Id == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _ctx.Orders.Remove(order);
+            _ctx.SaveChanges();
+            return new NoContentResult();
+        }
+    }
 }

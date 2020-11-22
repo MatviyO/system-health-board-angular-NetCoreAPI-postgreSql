@@ -2,7 +2,6 @@ C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\bin\Debug\netcoreapp3.1\WebApiCore.exe
-C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.csprojAssemblyReference.cache
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.AssemblyInfoInputs.cache
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.AssemblyInfo.cs
 C:\Users\user\Code\GitProjects\system-health-board-angular-NetCoreAPI-postgreSql\WebApiCore\WebApiCore\obj\Debug\netcoreapp3.1\WebApiCore.RazorTargetAssemblyInfo.cache

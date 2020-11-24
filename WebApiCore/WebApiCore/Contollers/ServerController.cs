@@ -46,7 +46,6 @@ namespace WebApiCore.Contollers
 			}
 			_ctx.SaveChanges();
 			return new NoContentResult();
-
 		}
 
 	}

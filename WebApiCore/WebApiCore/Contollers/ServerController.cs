@@ -30,6 +30,22 @@ namespace WebApiCore.Contollers
 		[HttpPut("{id}")]
 		public IActionResult Message(int id, [FromBody] ServerMessage msg)
 		{
+			var server = _ctx.Servers.Find(id);
+
+			if(server == null)
+			{
+				return NotFound();
+			}
+			if (msg.Payload == "active")
+			{
+				server.IsOnline = true;
+			}
+			if(msg.Payload == "deactive")
+			{
+				server.IsOnline = false;
+			}
+			_ctx.SaveChanges();
+			return new NoContentResult();
 
 		}
 

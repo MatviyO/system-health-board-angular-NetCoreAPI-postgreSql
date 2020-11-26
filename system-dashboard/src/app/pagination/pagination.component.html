@@ -3,7 +3,10 @@
   <span class="page-totals">{{totalPAges()}} total pages </span>
 
   <button class="btn btn-small btn-info" (click)="onPrev()" >Previous Page</button>
-  <b>...</b>
+  <button class="btn btn-small btn-info"
+          *ngFor="let pageNum of getPages()"
+          (click)="onPage(pageNum)"
+          [ngClass]="{'active': pageNum === page, 'disabled': loading}"></button>
   <button class="btn btn-small btn-info" (click)="onNext()" >Next Page</button>
 
 </div>

@@ -7,6 +7,7 @@
           *ngFor="let pageNum of getPages()"
           (click)="onPage(pageNum)"
           [ngClass]="{'active': pageNum === page, 'disabled': loading}"></button>
+  
   <button class="btn btn-small btn-info" (click)="onNext()" >Next Page</button>
 
 </div>

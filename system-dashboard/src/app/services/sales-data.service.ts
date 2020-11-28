@@ -7,20 +7,21 @@ import {map} from 'rxjs/operators';
 @Injectable()
 export class SalesDataService {
 
+  private readonly url = 'http://localhost:5000/api/';
   constructor(private http: HttpClient) { }
 
   getOrders(pageIndex: number, pageSize: number): any {
-    return this.http.get('http://localhost:5000/api/order/' + pageIndex + '/' + pageSize)
-      .pipe(map(res => res.json()));
+    return this.http.get(`${this.url}order/` + pageIndex + '/' + pageSize)
+      .pipe(map((res: Response) => res.json()));
   }
 
   getOrdersByCustomer(n: number): any {
-    return this.http.get('http://localhost:5000/api/order/bycustomer/' + n)
-      .pipe(map(res => res.json()));
+    return this.http.get(`${this.url}order/bycustomer/` + n)
+      .pipe(map((res: Response) => res.json()));
   }
 
   getOrdersByState(): any {
-    return this.http.get('http://localhost:5000/api/order/bystate/')
-      .pipe(map(res => res.json()));
+    return this.http.get(`${this.url}order/bystate/`)
+      .pipe(map((res: Response) => res.json()));
   }
 }

@@ -51,7 +51,11 @@ export class LineChartComponent implements OnInit {
       });
   }
   getChartData(allOrders: any, name: string): any {
-    const customerOrder = allOrders.filter(o => o.customer.name === name);
+    const customerOrders = allOrders.filter(o => o.customer.name === name);
+
+    const formattedOrders = customerOrders.reduce((r, e) => {
+      r.push([e.placed, e.total]);
+    }, []);
   }
 
 }

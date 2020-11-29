@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LineChartColors} from '../../shared/chart.colors';
 import {SalesDataService} from '../../services/sales-data.service';
+import moment = require('moment');
 
 // const LineChartData: any[] = [
 //   {data: [65, 59, 80, 81, 56, 54], label: 'Sentiment Analysis'},
@@ -47,6 +48,13 @@ export class LineChartComponent implements OnInit {
             result.push(this.getChartData(this.allOrders, i));
             return result;
           }, []);
+
+          let dates = allChartData.map(x => x['data']).reduce((a, i) => {
+            a.push(i.map(o => new Date(o[0])));
+          }, []);
+          dates = [].concat.apply([], dates);
+
+          const r = this.getCustomerOrderByDate(allChartData, dates);
         });
       });
   }
@@ -56,6 +64,19 @@ export class LineChartComponent implements OnInit {
     const formattedOrders = customerOrders.reduce((r, e) => {
       r.push([e.placed, e.total]);
     }, []);
+
+    const result = {customer: name , data: formattedOrders};
+
+    return result;
+  }
+
+  getCustomerOrderByDate(orders: any, dates: any): any {
+    const customers = this.topCustomers;
+    const prettyDates = date.map(x => this.toFriendlyDate(x));
+  }
+
+  toFriendlyDate(date: Date): any {
+    return moment(date).endOf('day').format('YY-MM-DD');
   }
 
 }

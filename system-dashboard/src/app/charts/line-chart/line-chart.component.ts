@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LineChartColors} from '../../shared/chart.colors';
 import {SalesDataService} from '../../services/sales-data.service';
 import moment = require('moment');
@@ -58,6 +58,7 @@ export class LineChartComponent implements OnInit {
         });
       });
   }
+
   getChartData(allOrders: any, name: string): any {
     const customerOrders = allOrders.filter(o => o.customer.name === name);
 
@@ -65,7 +66,7 @@ export class LineChartComponent implements OnInit {
       r.push([e.placed, e.total]);
     }, []);
 
-    const result = {customer: name , data: formattedOrders};
+    const result = {customer: name, data: formattedOrders};
 
     return result;
   }

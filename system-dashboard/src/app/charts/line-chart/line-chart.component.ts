@@ -73,7 +73,8 @@ export class LineChartComponent implements OnInit {
 
   getCustomerOrderByDate(orders: any, dates: any): any {
     const customers = this.topCustomers;
-    const prettyDates = date.map(x => this.toFriendlyDate(x));
+    const prettyDates = dates.map(x => this.toFriendlyDate(x));
+    const u = Array.from(new Set(prettyDates)).sort();
   }
 
   toFriendlyDate(date: Date): any {

@@ -75,6 +75,13 @@ export class LineChartComponent implements OnInit {
     const customers = this.topCustomers;
     const prettyDates = dates.map(x => this.toFriendlyDate(x));
     const u = Array.from(new Set(prettyDates)).sort();
+
+    const result = {};
+    const dataSets = result['date'] = [];
+
+    customers.reduce((x, y, i) => {
+      
+    })
   }
 
   toFriendlyDate(date: Date): any {

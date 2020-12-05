@@ -80,8 +80,16 @@ export class LineChartComponent implements OnInit {
     const dataSets = result['date'] = [];
 
     customers.reduce((x, y, i) => {
-      
-    })
+      dataSets[i] = {
+        customer: y, orders:
+        u.reduce((r, e, j) => {
+          const obj = {};
+          obj['date'] = e;
+          obj['total'] = this.getCustomerOrderByDate(e, y);
+        })
+      };
+      return x;
+    }, []);
   }
 
   toFriendlyDate(date: Date): any {

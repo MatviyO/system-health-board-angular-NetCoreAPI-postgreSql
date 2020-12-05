@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LineChartColors} from '../../shared/chart.colors';
 import {SalesDataService} from '../../services/sales-data.service';
-import moment = require('moment');
+import * as moment from 'moment';
+
 
 // const LineChartData: any[] = [
 //   {data: [65, 59, 80, 81, 56, 54], label: 'Sentiment Analysis'},
@@ -54,7 +55,13 @@ export class LineChartComponent implements OnInit {
           }, []);
           dates = [].concat.apply([], dates);
 
-          const r = this.getCustomerOrderByDate(allChartData, dates);
+          const r = this.getCustomerOrderByDate(allChartData, dates)['data'];
+          this.lineChartLabels = r[0]['orders'].map(o => o['date']);
+          this.lineChartData = [
+            {'data': r[0].orders.map(x => x.total), 'label': r[0]['curtomer'] },
+            {'data': r[1].orders.map(x => x.total), 'label': r[1]['curtomer'] },
+            {'data': r[2].orders.map(x => x.total), 'label': r[2]['curtomer'] },
+          ];
         });
       });
   }
@@ -80,12 +87,15 @@ export class LineChartComponent implements OnInit {
     const dataSets = result['date'] = [];
 
     customers.reduce((x, y, i) => {
+      const customerOrders = [];
       dataSets[i] = {
         customer: y, orders:
         u.reduce((r, e, j) => {
           const obj = {};
           obj['date'] = e;
-          obj['total'] = this.getCustomerOrderByDate(e, y);
+          obj['total'] = this.getCustomerDateTotal(e, y);
+          customerOrders.push(obj);
+          return customerOrders;
         })
       };
       return x;
@@ -94,6 +104,15 @@ export class LineChartComponent implements OnInit {
 
   toFriendlyDate(date: Date): any {
     return moment(date).endOf('day').format('YY-MM-DD');
+  }
+
+  getCustomerDateTotal(date: string, customer: string): void {
+    const r = this.allOrders.filter(o => o.customer.name === customer && this.toFriendlyDate(o.placed) === date);
+
+    const result = r.reduce((a, b) => {
+      return a + b.total;
+    }, 0);
+    return result;
   }
 
 }

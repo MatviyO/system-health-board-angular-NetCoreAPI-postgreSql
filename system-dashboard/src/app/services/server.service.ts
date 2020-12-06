@@ -23,9 +23,9 @@ export class ServerService {
   options: RequestOptions;
   headers: Headers;
 
-  getServers(): Observable<Server[]> {
+  getServers(): any {
     return this.http.get('http://localhost:5000/api/server')
-    .pipe(map(res => res.json()))
+    .pipe(map((res: Response) => res.json()))
     .pipe(catchError(this.handleError));
   }
 
@@ -37,9 +37,9 @@ export class ServerService {
     return Observable.throw(errMsg);
   }
 
-  handleServerMessage(msg: ServerMessage): Observable<Response> {
+  handleServerMessage(msg: ServerMessage): any {
     const url = 'http://localhost:5000/api/server/' + msg.id;
-    return this.http.put(url, msg, this.options).pipe(map(res => res.json()));
+    return this.http.put(url, msg, this.options).pipe(map((res) => res.json()));
   }
 
 }

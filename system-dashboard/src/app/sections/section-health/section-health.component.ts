@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Server} from '../../shared/model/server.model';
+import {ServerService} from '../../services/server.service';
 
 
 const ServerData = [
@@ -17,9 +18,12 @@ export class SectionHealthComponent implements OnInit {
 
   servers: Server[] = ServerData;
 
-  constructor() { }
+  constructor(private service: ServerService) { }
 
   ngOnInit(): void {
+    this.service.getServers().subscribe(res => {
+
+    });
   }
 
 }

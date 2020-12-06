@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Server} from '../shared/model/server.model';
+import {ServerMessage} from '../shared/model/server-message';
 
 @Component({
   selector: 'app-server',
@@ -8,6 +9,7 @@ import {Server} from '../shared/model/server.model';
 })
 export class ServerComponent implements OnInit {
   @Input() server: Server;
+  @Output() serverAction = new EventEmitter<ServerMessage>();
   color: string;
   buttonText: string;
 
@@ -27,8 +29,17 @@ export class ServerComponent implements OnInit {
       this.buttonText = 'Start';
     }
   }
-  toggleStatus(status: boolean): any {
-    this.getServerAction(!status);
+
+  sendServerAction(isOnline: boolean) {
+    const payload = this.buildPayload();
+    this.serverAction.emit(payload);
   }
+
+  buildPayload(): ServerMessage {
+    
+  }
+  // toggleStatus(status: boolean): any {
+  //   this.getServerAction(!status);
+  // }
 
 }

@@ -1,16 +1,15 @@
-#sidebar {
-  height: 100vh;
-  padding-top: 80px;
-  position: fixed;
-  background-color: #191F26;
-  color: #f7fff7;
-
-}
-#dashboard {
-  margin-top: 60px;
+#sideBar{
+    height: 100vh;
+    padding-top: 80px;
+    position: fixed;
+    background-color: #191F26;
 }
 
-#navbar {
-  background-color: #161A1E!important;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2), 0 3px 6px rgba(0, 0, 0, 0.25);
+#dashboard{
+    margin-top: 60px;
+}
+
+#navbar{
+    background-color: #161A1E!important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.25);
 }

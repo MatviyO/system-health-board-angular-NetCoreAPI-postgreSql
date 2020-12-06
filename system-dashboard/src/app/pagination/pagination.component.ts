@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -6,6 +6,7 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnInit {
+
 
   @Input() page: number;
   @Input() count: number;
@@ -19,20 +20,25 @@ export class PaginationComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
+
   onPrev(): void {
     this.goPrev.emit(true);
   }
+
   onNext(): void {
     this.goNext.emit(true);
   }
+
   onPage(n: number): void {
     this.goPage.emit(n);
   }
-  totalPAges(): number {
+
+  totalPages(): number {
     return Math.ceil(this.count / this.perPage) || 0;
   }
+
   isLastPage(): boolean {
     return this.perPage * this.page >= this.count;
   }
@@ -40,6 +46,7 @@ export class PaginationComponent implements OnInit {
   getMin(): number {
     return ((this.perPage * this.page) - this.perPage) + 1;
   }
+
   getMax(): number {
     let max = this.perPage * this.page;
     if (max > this.count) {
@@ -51,25 +58,28 @@ export class PaginationComponent implements OnInit {
   getPages(): number[] {
     const totalPages = Math.ceil(this.count / this.perPage);
     const thisPage = this.page || 1;
-    const pagesShow = this.pagesToShow || 9;
-
+    const pagesToShow = this.pagesToShow || 9;
     const pages: number[] = [];
     pages.push(thisPage);
-    for (let i = 0; i < pageXOffset - 1; i++) {
-      if (pages.length < pagesShow) {
+
+    console.log('Starting loop with: total pages:', totalPages, 'thisPage:', thisPage, 'pagesToShow:', pagesToShow );
+    for (let i = 0; i < pagesToShow - 1; i++) {
+      console.log('pages[]:', pages);
+      if (pages.length < pagesToShow) {
         if (Math.min.apply(null, pages) > 1) {
           pages.push(Math.min.apply(null, pages) - 1);
+          console.log('pushing', Math.min.apply(null, pages) - 1, 'onto array');
         }
       }
-      if (pages.length < pagesShow) {
+
+      if (pages.length < pagesToShow) {
         if (Math.max.apply(null, pages) < totalPages) {
           pages.push(Math.max.apply(null, pages) + 1);
+          console.log('pushing', Math.max.apply(null, pages) + 1, 'onto array');
         }
       }
     }
     pages.sort((a, b) => a - b);
     return pages;
-
   }
-
 }

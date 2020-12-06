@@ -1,5 +1,11 @@
-<div class="card mb-3 shadow block-status" [ngStyle]="{'background-color': color}">
-  <div class="card-header">{{server.name}}</div>
-  <div class="card-body">{{server.isOnline}}</div>
-  <button (click)="toggleStatus(server.isOnline)" class="btn btn-default action">{{buttonText}}</button>
+<div class="card mb-3 shadow block-status" 
+    [ngStyle]="{'background-color': color}">
+  <div class="card-header name">
+    {{ serverInput.name }}
+  </div>
+  <div class="card-body status">
+    {{ serverStatus }}
+  <button (click)="sendServerAction(serverInput.isOnline)" 
+    class="btn btn-default action">{{ buttonText }}</button>
+  </div>
 </div>

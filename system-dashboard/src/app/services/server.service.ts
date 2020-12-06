@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-
+import { Http, RequestOptions, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { ServerMessage } from '../shared/server-message';
+import { Server } from '../shared/server';
 import 'rxjs/add/operator/catch';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Server} from '../shared/model/server.model';
-import {ServerMessage} from '../shared/model/server-message';
-import {catchError, map} from 'rxjs/operators';
-import {RequestOptions} from 'http';
 
 @Injectable()
 export class ServerService {
 
-  constructor(private http: HttpClient) {
+  // https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+
+  constructor(private _http: Http) {
     this.headers = new Headers({
       'Content-Type' : 'application/json',
       'Accept' : 'q=0.8;application/json;q=0.9'
@@ -23,13 +22,13 @@ export class ServerService {
   options: RequestOptions;
   headers: Headers;
 
-  getServers(): any {
-    return this.http.get('http://localhost:5000/api/server')
-    .pipe(map((res: Response) => res.json()))
-    .pipe(catchError(this.handleError));
+  getServers(): Observable<Server[]> {
+    return this._http.get('http://localhost:5000/api/server')
+    .map(res => res.json())
+    .catch(this.handleError);
   }
 
-  handleError(error: any): any {
+  handleError(error: any) {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
 
@@ -37,9 +36,9 @@ export class ServerService {
     return Observable.throw(errMsg);
   }
 
-  handleServerMessage(msg: ServerMessage): any {
+  handleServerMessage(msg: ServerMessage): Observable<Response> {
     const url = 'http://localhost:5000/api/server/' + msg.id;
-    return this.http.put(url, msg, this.options).pipe(map((res) => res.json()));
+    return this._http.put(url, msg, this.options).map(res => res.json());
   }
 
 }

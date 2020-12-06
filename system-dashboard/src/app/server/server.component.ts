@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Server} from '../shared/model/server.model';
-import {ServerMessage} from '../shared/model/server-message';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ServerMessage } from '../shared/server-message';
+import { Server } from '../shared/server';
 
 @Component({
   selector: 'app-server',
@@ -8,38 +8,61 @@ import {ServerMessage} from '../shared/model/server-message';
   styleUrls: ['./server.component.css']
 })
 export class ServerComponent implements OnInit {
-  @Input() server: Server;
-  @Output() serverAction = new EventEmitter<ServerMessage>();
-  color: string;
-  buttonText: string;
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.getServerAction(this.server.isOnline);
+  color: string;
+  buttonText: string;
+  serverStatus: string;
+  isLoading: boolean;
+
+  @Input() serverInput: Server;
+  @Output() serverAction = new EventEmitter<ServerMessage>();
+
+  ngOnInit() {
+    this.setServerStatus(this.serverInput.isOnline);
   }
-  getServerAction(isOnline: boolean): any {
+
+  setServerStatus(isOnline: boolean) {
     if (isOnline) {
-      this.server.isOnline = true;
-      this.color = '#66BB6A';
+      this.serverInput.isOnline = true;
+      this.serverStatus = 'Online';
+      this.color = '#66BB6A',
       this.buttonText = 'Shut Down';
     } else {
-      this.server.isOnline = false;
-      this.color = '#FFBB6B';
+      this.serverInput.isOnline = false;
+      this.serverStatus = 'Offline';
+      this.color = '#FF6B6B';
       this.buttonText = 'Start';
     }
   }
 
+  makeLoading() {
+    this.color = '#FFCA28';
+    this.buttonText = 'Pending...';
+    this.isLoading = true;
+    this.serverStatus = 'Loading';
+  }
+
   sendServerAction(isOnline: boolean) {
-    const payload = this.buildPayload();
+    console.log('sendServerAction called!');
+    this.makeLoading();
+    const payload = this.buildPayload(isOnline);
     this.serverAction.emit(payload);
   }
 
-  buildPayload(): ServerMessage {
-    
+  buildPayload(isOnline: boolean): ServerMessage {
+    if (isOnline) {
+      return {
+        id: this.serverInput.id,
+        payload: 'deactivate'
+      };
+    } else {
+      return {
+        id: this.serverInput.id,
+        payload: 'activate'
+      };
+    }
   }
-  // toggleStatus(status: boolean): any {
-  //   this.getServerAction(!status);
-  // }
-
 }
+
